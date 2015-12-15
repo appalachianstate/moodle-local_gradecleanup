@@ -25,7 +25,6 @@ defined('MOODLE_INTERNAL') || die();
 
 /** Include essential files */
 require_once($CFG->libdir . '/grade/constants.php');
-
 require_once($CFG->libdir . '/grade/grade_category.php');
 require_once($CFG->libdir . '/grade/grade_item.php');
 require_once($CFG->libdir . '/grade/grade_grade.php');
@@ -69,8 +68,8 @@ function asu_grade_cron() {
     }
     $rs->close();
 
-    // cleanup history tables
     /* CORE CODE
+    // cleanup history tables
     if (!empty($CFG->gradehistorylifetime)) {  // value in days
         $histlifetime = $now - ($CFG->gradehistorylifetime * 3600 * 24);
         $tables = array('grade_outcomes_history', 'grade_categories_history', 'grade_items_history', 'grade_grades_history', 'scale_history');

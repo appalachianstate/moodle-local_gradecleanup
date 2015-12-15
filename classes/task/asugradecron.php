@@ -26,7 +26,7 @@ namespace local_asugradecron\task;
 class asugradecron extends \core\task\scheduled_task {
     public function get_name() {
         // Shown in admin screens
-        return get_string('asugradecron', 'local_asugradecron');
+        return get_string('pluginname', 'local_asugradecron');
     }
      
     public function execute() {
