@@ -20,12 +20,15 @@
  * @copyright 2015, Appalachian State University
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
- 
-defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2015121500;
-$plugin->requires  = 2014111007;
-$plugin->cron      = 0;
-$plugin->component = 'local_asugradecron';
-$plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = '0.0.1';
+$tasks = array(
+    array(
+        'classname' => 'local_asugradecron\task\asugradecron',
+        'blocking' => 0,
+        'minute' => '5,15,25,35,45,55',
+        'hour' => '*',
+        'day' => '*',
+        'dayofweek' => '*',
+        'month' => '*'
+    )
+);
