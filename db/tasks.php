@@ -25,8 +25,8 @@ $tasks = array(
     array(
         'classname' => 'local_asugradecron\task\asugradecron',
         'blocking' => 0,
-        'minute' => '5,15,25,35,45,55',
-        'hour' => '*',
+        'minute' => '5',
+        'hour' => '3',
         'day' => '*',
         'dayofweek' => '*',
         'month' => '*'

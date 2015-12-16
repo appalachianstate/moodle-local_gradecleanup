@@ -20,12 +20,17 @@
  * @copyright 2015, Appalachian State University
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
- 
-defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2015121502;
-$plugin->requires  = 2014111007;
-$plugin->cron      = 0;
-$plugin->component = 'local_asugradecron';
-$plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = '0.0.1';
+defined('MOODLE_INTERNAL') || die;
+
+if ($hassiteconfig) { // needs this condition or there is error on login page
+    require_once($CFG->dirroot.'/local/asugradecron/lib.php');
+    $settings = new admin_settingpage(
+        'local_asugradecron',
+        get_string('pluginname', 'local_asugradecron')
+    );
+     
+    $settings->add(new admin_setting_configtext('asugradecron_gradehistorylifetime', get_string('asugradecron_gradehistorylifetime_label', 'local_asugradecron'), get_string('asugradecron_gradehistorylifetime_desc', 'local_asugradecron'), '0', PARAM_INT));
+
+    $ADMIN->add('localplugins', $settings);
+}

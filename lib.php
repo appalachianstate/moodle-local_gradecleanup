@@ -32,9 +32,18 @@ require_once($CFG->libdir . '/grade/grade_scale.php');
 require_once($CFG->libdir . '/grade/grade_outcome.php');
 
 function asu_grade_cron() {
-    global $CFG, $DB;
-    $gradehistorylifetimecustom = 180;
-
+    global $CFG, $DB;    
+    
+    $gradehistorylifetimeAsu = NULL;
+    
+    if (isset($CFG->asugradecron_gradehistorylifetime)) {
+        $gradehistorylifetimeAsu = $CFG->asugradecron_gradehistorylifetime;
+    }
+    
+    if (!isset($gradehistorylifetimeAsu) || trim($gradehistorylifetimeAsu)==='') { // default to 0 days
+        $gradehistorylifetimeAsu = 0;
+    }
+    
     $now = time();
 
     $sql = "SELECT i.*
@@ -67,21 +76,8 @@ function asu_grade_cron() {
         $grade_grade->update('locktime');
     }
     $rs->close();
-
-    /* CORE CODE
-    // cleanup history tables
-    if (!empty($CFG->gradehistorylifetime)) {  // value in days
-        $histlifetime = $now - ($CFG->gradehistorylifetime * 3600 * 24);
-        $tables = array('grade_outcomes_history', 'grade_categories_history', 'grade_items_history', 'grade_grades_history', 'scale_history');
-        foreach ($tables as $table) {
-            if ($DB->delete_records_select($table, "timemodified < ?", array($histlifetime))) {
-                mtrace("    Deleted old grade history records from '$table'");
-            }
-        }
-    }
-    */
     
-    $histlifetime = $now - ($gradehistorylifetimecustom * 3600 * 24);
+    $histlifetime = $now - ($gradehistorylifetimeAsu * 3600 * 24);
     $tables = array('grade_outcomes_history', 'grade_categories_history', 'grade_items_history', 'grade_grades_history', 'scale_history');
     foreach ($tables as $table) {
         if ($DB->delete_records_select($table, "timemodified < ?", array($histlifetime))) {
