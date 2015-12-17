@@ -15,24 +15,14 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
  
 /**
- * @package   local_asugradecron
+ * @package   local_gradecleanup
  * @author    Michelle Melton <meltonml@appstate.edu>
  * @copyright 2015, Appalachian State University
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-namespace local_asugradecron\task;
+defined('MOODLE_INTERNAL') || die();
 
-class asugradecron extends \core\task\scheduled_task {
-    public function get_name() {
-        // Shown in admin screens
-        return get_string('pluginname', 'local_asugradecron');
-    }
-     
-    public function execute() {
-        global $CFG;
-
-        require_once($CFG->dirroot . '/local/asugradecron/lib.php');
-        asu_grade_cron();
-    }
-}
+$string['pluginname'] = 'Grade cleanup';
+$string['gradecleanup_daystokeep_label'] = 'Days to keep';
+$string['gradecleanup_daystokeep_desc'] = 'Enter the number of days you want to keep history of changes in grade related tables. It is recommended to keep it as long as possible. If you experience performance problems or have limited database space, try to set lower value. Enter 0 to never delete the history.';

@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
  
 /**
- * @package   local_asugradecron
+ * @package   local_gradecleanup
  * @author    Michelle Melton <meltonml@appstate.edu>
  * @copyright 2015, Appalachian State University
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -23,9 +23,9 @@
  
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2015121502;
+$plugin->version   = 2015121506;
 $plugin->requires  = 2014111007;
 $plugin->cron      = 0;
-$plugin->component = 'local_asugradecron';
+$plugin->component = 'local_gradecleanup';
 $plugin->maturity  = MATURITY_STABLE;
 $plugin->release   = '0.0.1';

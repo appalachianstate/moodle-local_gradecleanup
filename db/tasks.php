@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
  
 /**
- * @package   local_asugradecron
+ * @package   local_gradecleanup
  * @author    Michelle Melton <meltonml@appstate.edu>
  * @copyright 2015, Appalachian State University
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -23,7 +23,7 @@
 
 $tasks = array(
     array(
-        'classname' => 'local_asugradecron\task\asugradecron',
+        'classname' => 'local_gradecleanup\task\gradecleanup',
         'blocking' => 0,
         'minute' => '5',
         'hour' => '3',
