@@ -26,6 +26,7 @@ defined('MOODLE_INTERNAL') || die();
 function grade_cleanup() {
     global $CFG, $DB;    
     
+    $now = time();
     $daystokeep = NULL;
     
     if (isset($CFG->gradecleanup_daystokeep)) {
