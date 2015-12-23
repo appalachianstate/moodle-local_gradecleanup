@@ -29,7 +29,7 @@ if ($hassiteconfig) { // needs this condition or there is error on login page
         'local_gradecleanup',
         get_string('pluginname', 'local_gradecleanup')
     );
-    $settings->add(new admin_setting_configtext('gradecleanup_daystokeep', get_string('gradecleanup_daystokeep_label', 'local_gradecleanup'), get_string('gradecleanup_daystokeep_desc', 'local_gradecleanup'), '0', PARAM_INT));
+    $settings->add(new admin_setting_configduration('gradecleanup_timetokeep', get_string('gradecleanup_timetokeep_label', 'local_gradecleanup'), get_string('gradecleanup_timetokeep_desc', 'local_gradecleanup'), '0', PARAM_INT));
 
     $ADMIN->add('localplugins', $settings);
 }

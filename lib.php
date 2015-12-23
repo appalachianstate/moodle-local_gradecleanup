@@ -27,17 +27,17 @@ function grade_cleanup() {
     global $CFG, $DB;    
     
     $now = time();
-    $daystokeep = NULL;
+    $timetokeep = NULL;
     
     if (isset($CFG->gradecleanup_daystokeep)) {
-        $daystokeep = $CFG->gradecleanup_daystokeep;
+        $timetokeep = $CFG->gradecleanup_timetokeep;
     }
     
-    if (!isset($daystokeep) || trim($daystokeep)==='') { // default to 0 days
-        $daystokeep = 0;
+    if (!isset($timetokeep) || trim($timetokeep)==='') { // default to 0 days
+        $timetokeep = 0;
     }
         
-    $histlifetime = $now - ($daystokeep * 3600 * 24);
+    $histlifetime = $now - $timetokeep;
     $tables = array('grade_outcomes_history', 'grade_categories_history', 'grade_items_history', 'grade_grades_history', 'scale_history');
     foreach ($tables as $table) {
         if ($DB->delete_records_select($table, "timemodified < ?", array($histlifetime))) {
