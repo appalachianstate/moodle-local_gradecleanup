@@ -13,7 +13,7 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
- 
+
 /**
  * @package   local_gradecleanup
  * @author    Michelle Melton <meltonml@appstate.edu>
@@ -25,10 +25,9 @@ namespace local_gradecleanup\task;
 
 class gradecleanup extends \core\task\scheduled_task {
     public function get_name() {
-        // Shown in admin screens
         return get_string('pluginname', 'local_gradecleanup');
     }
-     
+
     public function execute() {
         global $CFG;
 

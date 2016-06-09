@@ -13,7 +13,7 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
- 
+
 /**
  * @package   local_gradecleanup
  * @author    Michelle Melton <meltonml@appstate.edu>
@@ -23,13 +23,15 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-if ($hassiteconfig) { // needs this condition or there is error on login page
-    
+if ($hassiteconfig) {
+
     $settings = new admin_settingpage(
         'local_gradecleanup',
         get_string('pluginname', 'local_gradecleanup')
     );
-    $settings->add(new admin_setting_configduration('gradecleanup_timetokeep', get_string('gradecleanup_timetokeep_label', 'local_gradecleanup'), get_string('gradecleanup_timetokeep_desc', 'local_gradecleanup'), '0', PARAM_INT));
+    $settings->add(new admin_setting_configduration('gradecleanup_timetokeep',
+      get_string('gradecleanup_timetokeep_label', 'local_gradecleanup'),
+      get_string('gradecleanup_timetokeep_desc', 'local_gradecleanup'), '0', PARAM_INT));
 
     $ADMIN->add('localplugins', $settings);
 }
