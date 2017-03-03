@@ -13,36 +13,38 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
- 
+
 /**
  * @package   local_gradecleanup
  * @author    Michelle Melton <meltonml@appstate.edu>
  * @copyright 2015, Appalachian State University
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
- 
+
 defined('MOODLE_INTERNAL') || die();
 
 function grade_cleanup() {
-    global $CFG, $DB;    
-    
+    global $CFG, $DB;
+
     $now = time();
-    $timetokeep = NULL;
-    
-    if (isset($CFG->gradecleanup_daystokeep)) {
+    $timetokeep = null;
+
+    if (isset($CFG->gradecleanup_timetokeep)) {
         $timetokeep = $CFG->gradecleanup_timetokeep;
     }
-    
-    if (!isset($timetokeep) || trim($timetokeep)==='') { // default to 0 days
+
+    // Default to 0 days.
+    if (!isset($timetokeep) || trim($timetokeep) === '') {
         $timetokeep = 0;
     }
-        
+
     $histlifetime = $now - $timetokeep;
-    $tables = array('grade_outcomes_history', 'grade_categories_history', 'grade_items_history', 'grade_grades_history', 'scale_history');
+    $tables = array('grade_outcomes_history', 'grade_categories_history',
+      'grade_items_history', 'grade_grades_history', 'scale_history');
     foreach ($tables as $table) {
         if ($DB->delete_records_select($table, "timemodified < ?", array($histlifetime))) {
             mtrace("    Deleted old grade history records from '$table'");
         }
     }
-    
 }
+
