@@ -41,10 +41,10 @@ function grade_cleanup() {
     $histlifetime = $now - $timetokeep;
     $tables = array('grade_outcomes_history', 'grade_categories_history',
       'grade_items_history', 'grade_grades_history', 'scale_history');
+
     foreach ($tables as $table) {
         if ($DB->delete_records_select($table, "timemodified < ?", array($histlifetime))) {
             mtrace("    Deleted old grade history records from '$table'");
         }
     }
 }
-

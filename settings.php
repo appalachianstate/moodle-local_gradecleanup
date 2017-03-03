@@ -31,8 +31,8 @@ if ($hassiteconfig) {
         get_string('pluginname', 'local_gradecleanup')
     );
     $settings->add(new admin_setting_configduration('gradecleanup_timetokeep',
-            get_string('gradecleanup_timetokeep_label', 'local_gradecleanup'),
-            get_string('gradecleanup_timetokeep_desc', 'local_gradecleanup'), '0', PARAM_INT));
+      get_string('gradecleanup_timetokeep_label', 'local_gradecleanup'),
+      get_string('gradecleanup_timetokeep_desc', 'local_gradecleanup'), '0', PARAM_INT));
 
     $ADMIN->add('localplugins', $settings);
 }
