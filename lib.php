@@ -27,15 +27,15 @@ function grade_cleanup() {
     global $CFG, $DB;
 
     $now = time();
-    $timetokeep = null;
+    $timetokeep = 0;
 
     if (isset($CFG->gradecleanup_timetokeep)) {
         $timetokeep = $CFG->gradecleanup_timetokeep;
     }
 
-    // Default to 0 days.
-    if (!isset($timetokeep) || trim($timetokeep) === '') {
-        $timetokeep = 0;
+    // Do nothing if config set to 0.
+    if (!isset($timetokeep) || trim($timetokeep) === '' || $timetokeep == 0) {
+        return;
     }
 
     $histlifetime = $now - $timetokeep;
