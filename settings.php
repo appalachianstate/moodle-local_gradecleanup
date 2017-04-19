@@ -23,16 +23,21 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-// Needs this condition or there is error on login page.
+// Verify moodle/site:config capability for system context - user can configure site settings.
 if ($hassiteconfig) {
-
-    $settings = new admin_settingpage(
-        'local_gradecleanup',
-        get_string('pluginname', 'local_gradecleanup')
-    );
-    $settings->add(new admin_setting_configduration('gradecleanup_timetokeep',
-      get_string('gradecleanup_timetokeep_label', 'local_gradecleanup'),
-      get_string('gradecleanup_timetokeep_desc', 'local_gradecleanup'), '0', PARAM_INT));
-
+    $settings = new admin_settingpage('local_gradecleanup', get_string('pluginname', 'local_gradecleanup'));
+    $settings->add(new admin_setting_configselect('local_gradecleanup/gradecleanup_daystokeep',
+            get_string('gradecleanup_daystokeep_label', 'local_gradecleanup'),
+            get_string('gradecleanup_daystokeep_desc', 'local_gradecleanup'),
+            '0',
+            array('0' => 'Never delete history',
+                  '1000' => '1000 days',
+                  '365' => '365 days',
+                  '180' => '180 days',
+                  '150' => '150 days',
+                  '120' => '120 days',
+                  '90' => '90 days',
+                  '60' => '60 days',
+                  '30' => '30 days')));
     $ADMIN->add('localplugins', $settings);
 }

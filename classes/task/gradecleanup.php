@@ -32,9 +32,34 @@ class gradecleanup extends \core\task\scheduled_task {
     }
 
     public function execute() {
-        global $CFG;
+        global $CFG, $DB;
 
-        require_once($CFG->dirroot . '/local/gradecleanup/lib.php');
-        grade_cleanup();
+        $daystokeep = get_config('local_gradecleanup', 'gradecleanup_daystokeep');
+
+        // Check for invalid configuration.
+        if (!is_numeric($daystokeep) || $daystokeep < 0) {
+            mtrace("    Days to keep setting is invalid");
+            return;
+        }
+
+        // Check for config value of 0 or not set.
+        if (!$daystokeep) {
+            mtrace("    Days to keep setting is not set or set to 0");
+            return;
+        }
+
+        // Calculate time to stop deleting grade histories.
+        $deletestopdate = time() - ($daystokeep * DAYSECS);
+        $humanreadabledate = date('c', $deletestopdate);
+        mtrace("    Deleting grade history prior to '$humanreadabledate'");
+
+        $tables = array('grade_outcomes_history', 'grade_categories_history',
+                'grade_items_history', 'grade_grades_history', 'scale_history');
+
+        foreach ($tables as $table) {
+            if ($DB->delete_records_select($table, "timemodified < ?", array($deletestopdate))) {
+                mtrace("    Deleted old grade history records from '$table'");
+            }
+        }
     }
 }

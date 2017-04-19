@@ -23,6 +23,6 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'Grade cleanup';
-$string['gradecleanup_timetokeep_label'] = 'Time to keep';
-$string['gradecleanup_timetokeep_desc'] = 'Enter the duration to keep history of changes in grade related tables. It is recommended to keep it as long as possible. If you experience performance problems or have limited database space, try to set lower value. Enter 0 to never delete the history.';
+$string['pluginname'] = 'Grade history cleanup';
+$string['gradecleanup_daystokeep_label'] = 'Grade history lifetime';
+$string['gradecleanup_daystokeep_desc'] = 'This specifies the length of time you want to keep history of changes in grade related tables. It is recommended to keep it as long as possible. If you experience performance problems or have limited database space, try to set lower value.';
