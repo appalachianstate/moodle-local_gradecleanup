@@ -23,7 +23,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2015121510;
+$plugin->version   = 2015121511;
 $plugin->requires  = 2014111007;
 $plugin->component = 'local_gradecleanup';
 $plugin->maturity  = MATURITY_STABLE;
