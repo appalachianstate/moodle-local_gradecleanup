@@ -62,8 +62,11 @@ class gradecleanup extends \core\task\scheduled_task {
         $deletestopdate = time() - ($daystokeep * DAYSECS);
         mtrace("    Deleting grade history prior to " . date('c', $deletestopdate));
 
-        $tables = array('grade_outcomes_history', 'grade_categories_history',
-                'grade_items_history', 'grade_grades_history', 'scale_history');
+        $tables = array('grade_outcomes_history',
+                        'grade_categories_history',
+                        'grade_items_history',
+                        'grade_grades_history',
+                        'scale_history');
 
         foreach ($tables as $table) {
             if ($DB->delete_records_select($table, "timemodified < ?", array($deletestopdate))) {
