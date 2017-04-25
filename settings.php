@@ -23,7 +23,7 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-require_once('classes/task/gradecleanup.php');
+require_once(__DIR__ . '/classes/task/gradecleanup.php');
 
 // Verify moodle/site:config capability for system context - user can configure site settings.
 if ($hassiteconfig) {
